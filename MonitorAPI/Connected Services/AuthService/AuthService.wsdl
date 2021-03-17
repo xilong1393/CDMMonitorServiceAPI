@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AuthenticateEMPLID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationdescription" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateEMPLIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticateEMPLIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthenticateEMPLIDSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthenticateEMPLID" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateEMPLIDSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateEMPLIDResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AuthServiceSoap">
+    <wsdl:operation name="AuthenticateEMPLID">
+      <wsdl:input message="tns:AuthenticateEMPLIDSoapIn" />
+      <wsdl:output message="tns:AuthenticateEMPLIDSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AuthServiceSoap" type="tns:AuthServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AuthenticateEMPLID">
+      <soap:operation soapAction="http://tempuri.org/AuthenticateEMPLID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AuthServiceSoap12" type="tns:AuthServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AuthenticateEMPLID">
+      <soap12:operation soapAction="http://tempuri.org/AuthenticateEMPLID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AuthService">
+    <wsdl:port name="AuthServiceSoap" binding="tns:AuthServiceSoap">
+      <soap:address location="https://colflash.cdm.depaul.edu/AuthService/AuthService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AuthServiceSoap12" binding="tns:AuthServiceSoap12">
+      <soap12:address location="https://colflash.cdm.depaul.edu/AuthService/AuthService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
